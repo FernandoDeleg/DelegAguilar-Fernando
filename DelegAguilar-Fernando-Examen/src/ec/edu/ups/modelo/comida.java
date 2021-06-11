@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class comida implements Serializable{
@@ -16,16 +17,18 @@ public class comida implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	private String nombre;
-	private String precioUnitario;
+	private Double precioUnitario;
 	
 	@ManyToOne
 	private pedido pedido;
+	@Transient
+    private boolean editable;
 
 	public comida() {
 		
 	}
 
-	public comida(int codigo, String nombre, String precioUnitario, ec.edu.ups.modelo.pedido pedido) {
+	public comida(int codigo, String nombre, Double precioUnitario, ec.edu.ups.modelo.pedido pedido) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -44,16 +47,23 @@ public class comida implements Serializable{
 	public String getNombre() {
 		return nombre;
 	}
+	public boolean isEditable() {
+		return editable;
+	    }
+
+	    public void setEditable(boolean editable) {
+		this.editable = editable;
+	    }
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public String getPrecioUnitario() {
+	public Double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
-	public void setPrecioUnitario(String precioUnitario) {
+	public void setPrecioUnitario(Double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 
@@ -105,6 +115,9 @@ public class comida implements Serializable{
 		return true;
 	}
 
-	
+	@Override
+    public String toString() {
+	return nombre;
+    }
 	
 }

@@ -18,4 +18,7 @@ public class comidaFacade extends AbstractFacade<comida>{
     protected EntityManager getEntityManager() {
         return em;
     }
+	
+	
+	
 }
